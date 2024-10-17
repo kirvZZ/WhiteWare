@@ -15,15 +15,15 @@ local SpeedValue = 1.3
 
 
 
-function Func.CreateSpeed()
+local function CreateSpeed()
 	local V,ProtectedCreation = pcall(function()
 		local InstanceValue = Instance.new("NumberValue")
 		local p1
 		local ReplicatedStorage = game.ReplicatedStorage
 		local LocalName = Players.LocalPlayer.Name
-		
+
 		local NameValue = "SP_ADONIS"
-		
+
 		if ReplicatedStorage:FindFirstChild("CharStats") then
 			p1 = ReplicatedStorage["CharStats"][LocalName]
 			InstanceValue=SpeedValue
@@ -33,14 +33,15 @@ function Func.CreateSpeed()
 		print("Called add")
 	end)
 end
-function Func.RemoveSpeed()
+
+local function RemoveSpeed()
 	local V,ProtectedCreation = pcall(function()
 		local p1
 		local ReplicatedStorage = game.ReplicatedStorage
 		local LocalName = Players.LocalPlayer.Name
-		
+
 		local NameValue = "SP_ADONIS"
-		
+
 		if ReplicatedStorage:FindFirstChild("CharStats") then
 			p1 = ReplicatedStorage["CharStats"][LocalName]
 			if p1["Currents"]:FindFirstChild(NameValue) then
@@ -50,8 +51,10 @@ function Func.RemoveSpeed()
 		print("Called remove")
 	end)
 end
-function Func.ChangeSpeed()
+
+local function ChangeSpeed(Default)
 	local V,ProtectedCreation = pcall(function()
+		SpeedValue = Default
 		if Speed then
 			if game.ReplicatedStorage["CharStats"]:FindFirstChild(Players.LocalPlayer.Name) then
 				if game.ReplicatedStorage["CharStats"][Players.LocalPlayer.Name]["Currents"]:FindFirstChild("SP_ADONIS") then
@@ -61,30 +64,31 @@ function Func.ChangeSpeed()
 		end
 	end)
 end
-function Func.AutoToggleSpeed()
+
+local function AutoToggleSpeed()
 	function TempCheck()
 		if Speed == true and game.ReplicatedStorage:FindFirstChild("CharStats") then
 			if game.ReplicatedStorage["CharStats"]:FindFirstChild(Players.LocalPlayer.Name) then
-				Func.CreateSpeed()
+				CreateSpeed()
 			end
 		end
 	end
 	Players.LocalPlayer.CharacterAdded:Connect(TempCheck)
 end
-Func.AutoToggleSpeed()
+
+AutoToggleSpeed()
 SpeedHack:Toggle({Title = "Speed",Default = false,Callback = function(Default) 
 	Speed = Default
 	print(Speed)
 	if Speed == true then
-		Func.CreateSpeed()
+		CreateSpeed()
 	elseif Speed == false then
-		Func.RemoveSpeed()
+		RemoveSpeed()
 	end
 end})
 
-SpeedHack:Slider({Name = "Speed-Modifier", Minimum = 0, Maximum = 10, Default = SpeedValue, Decimals = 0.1, Pointer = SpeedValue,Callback = function(Default)
-	Func.ChangeSpeed()
-	print(SpeedValue)
+SpeedHack:Slider({Name = "Speed-Modifier", Minimum = 0, Maximum = 10, Default = SpeedValue, Decimals = 0.1, Pointer = 0,Callback = function(Default)
+	ChangeSpeed(Default)
 end})
 
 Window:Initialize()
