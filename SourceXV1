@@ -1,0 +1,134 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
+local Window = Library:New({Name = "White?? | v1.05", Accent = Color3.fromRGB(255, 255, 255)})
+--
+local PlayerS = Window:Page({Name = "Player"})
+--
+local Players = game:GetService("Players")
+
+local SpeedHack = PlayerS:Section({Name = "Speed-Hack", Side = "Left"})
+local AccelHack = PlayerS:Section({Name = "Acceleration", Side = "Left"})
+
+local Func = {}
+
+local Speed = false
+local SpeedValue = 1
+local Acceleration = false
+local AccelerationValue = 1
+
+
+
+local function CreateSpeed()
+	local InstanceValue = Instance.new("NumberValue")
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local LocalName = game.Players.LocalPlayer.Name
+	local NameValue = "SP_ADONIS"
+
+	if ReplicatedStorage:FindFirstChild("CharStats") then
+		local payx1 = ReplicatedStorage["CharStats"][LocalName]
+		InstanceValue.Value=SpeedValue
+		InstanceValue.Name = NameValue
+		InstanceValue.Parent = payx1["Currents"]
+	end
+end
+
+local function RemoveSpeed()
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local LocalName = game.Players.LocalPlayer.Name
+	local NameValue = "SP_ADONIS"
+
+	if ReplicatedStorage:FindFirstChild("CharStats") then
+		local payv1 = ReplicatedStorage["CharStats"][LocalName]
+		if payv1["Currents"]:FindFirstChild(NameValue) then
+			payv1["Currents"][NameValue]:Destroy()
+		end
+	end
+end
+
+local function ChangeSpeed(Default)
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local LocalName = game.Players.LocalPlayer.Name
+	if Speed then
+		if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+			if ReplicatedStorage["CharStats"][LocalName]["Currents"]:FindFirstChild("SP_ADONIS") then
+				ReplicatedStorage["CharStats"][LocalName]["Currents"]["SP_ADONIS"].Value = SpeedValue
+			end
+		end
+	end
+end
+
+local function AutoToggleSpeed()
+	function TempCheck()
+		local ReplicatedStorage = game:GetService("ReplicatedStorage")
+		local LocalName = game.Players.LocalPlayer.Name
+		if Speed == true and ReplicatedStorage:FindFirstChild("CharStats") then
+			if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+				CreateSpeed()
+			end
+		end
+	end
+	game.Players.LocalPlayer.CharacterAdded:Connect(TempCheck)
+end
+
+local function ChangeAccelerate()
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local LocalName = game.Players.LocalPlayer.Name
+	if Acceleration then
+		if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+			if ReplicatedStorage["CharStats"][LocalName]:FindFirstChild("AccelerationModifier") then
+				ReplicatedStorage["CharStats"][LocalName]["AccelerationModifier"].Value = AccelerationValue
+			end
+		end
+	end
+end
+
+local function AutoToggleAcceleration()
+	function TempCheck2()
+		local ReplicatedStorage = game:GetService("ReplicatedStorage")
+		local LocalName = game.Players.LocalPlayer.Name
+		if Acceleration == true and ReplicatedStorage:FindFirstChild("CharStats") then
+			if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+				ReplicatedStorage["CharStats"][LocalName]["AccelerationModifier"].Value = AccelerationValue
+			end
+		end
+	end
+	game.Players.LocalPlayer.CharacterAdded:Connect(TempCheck2)
+end
+
+AutoToggleSpeed()
+SpeedHack:Toggle({Title = "Speed",Default = false,Callback = function(Default) 
+	Speed = Default
+	if Speed == true then
+		CreateSpeed()
+	elseif Speed == false then
+		RemoveSpeed()
+	end
+end})
+
+SpeedHack:Slider({Name = "Speed-Modifier", Minimum = 0, Maximum = 20, Default = SpeedValue, Decimals = 0.1, Pointer = SpeedValue,Callback = function(Default)
+	SpeedValue = Default
+	ChangeSpeed(Default)
+end})
+
+AccelHack:Toggle({Title = "Acceleration",Default = false,Callback = function(Default) 
+	Acceleration = Default
+	if Acceleration == true then
+		local ReplicatedStorage = game:GetService("ReplicatedStorage")
+		local LocalName = game.Players.LocalPlayer.Name
+		if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+			ReplicatedStorage["CharStats"][LocalName]["AccelerationModifier"].Value = AccelerationValue
+		end
+	elseif Acceleration == false then
+		local ReplicatedStorage = game:GetService("ReplicatedStorage")
+		local LocalName = game.Players.LocalPlayer.Name
+		if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+			ReplicatedStorage["CharStats"][LocalName]["AccelerationModifier"].Value = 1
+		end
+	end
+end})
+
+AccelHack:Slider({Name = "Acceleration-Modifier", Minimum = 0, Maximum = 20, Default = AccelerationValue, Decimals = 0.1, Pointer = AccelerationValue,Callback = function(Default)
+	AccelerationValue = Default
+	ChangeAccelerate(Default)
+end})
+
+Window:Initialize()
