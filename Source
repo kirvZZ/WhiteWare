@@ -1,0 +1,87 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/Infinity-Yield/main/source"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
+local Window = Library:New({Name = "White?? | v1.01", Accent = Color3.fromRGB(255, 255, 255)})
+--
+local PlayerS = Window:Page({Name = "Player"})
+--
+local Players = game:GetService("Players")
+
+local SpeedHack = PlayerS:Section({Name = "Speed-Hack", Side = "Left"})
+
+local Func = {}
+
+local Speed = false
+local SpeedValue = 1.3
+
+
+
+
+function Func.CreateSpeed()
+	local V,ProtectedCreation = pcall(function()
+		local InstanceValue = Instance.new("NumberValue")
+		local p1
+		local ReplicatedStorage = game.ReplicatedStorage
+		local LocalName = Players.LocalPlayer.Name
+		
+		local NameValue = "SP_ADONIS"
+		
+		if ReplicatedStorage:FindFirstChild("CharStats") then
+			p1 = ReplicatedStorage["CharStats"][LocalName]
+			InstanceValue=SpeedValue
+			InstanceValue.Name = NameValue
+			InstanceValue.Parent = p1["Currents"]
+		end
+	end)
+end
+function Func.RemoveSpeed()
+	local V,ProtectedCreation = pcall(function()
+		local p1
+		local ReplicatedStorage = game.ReplicatedStorage
+		local LocalName = Players.LocalPlayer.Name
+		
+		local NameValue = "SP_ADONIS"
+		
+		if ReplicatedStorage:FindFirstChild("CharStats") then
+			p1 = ReplicatedStorage["CharStats"][LocalName]
+			if p1["Currents"]:FindFirstChild(NameValue) then
+				p1["Currents"][NameValue]:Destroy()
+			end
+		end
+	end)
+end
+function Func.ChangeSpeed()
+	local V,ProtectedCreation = pcall(function()
+		if Speed then
+			if game.ReplicatedStorage["CharStats"]:FindFirstChild(Players.LocalPlayer.Name) then
+				if game.ReplicatedStorage["CharStats"][Players.LocalPlayer.Name]["Currents"]:FindFirstChild("SP_ADONIS") then
+					game.ReplicatedStorage["CharStats"][Players.LocalPlayer.Name]["Currents"]["SP_ADONIS"].Value = SpeedValue
+				end
+			end
+		end
+	end)
+end
+function Func.AutoToggleSpeed()
+	function TempCheck()
+		if Speed == true and game.ReplicatedStorage:FindFirstChild("CharStats") then
+			if game.ReplicatedStorage["CharStats"]:FindFirstChild(Players.LocalPlayer.Name) then
+				Func.CreateSpeed()
+			end
+		end
+	end
+	Players.LocalPlayer.CharacterAdded:Connect(TempCheck)
+end
+Func.AutoToggleSpeed()
+SpeedHack:Toggle({Title = "Speed",Default = false,Callback = function(Default) 
+	Speed = Default
+	if Speed == true then
+		Func.CreateSpeed()
+	elseif Speed == false then
+		Func.RemoveSpeed()
+	end
+end})
+
+SpeedHack:Slider({Name = "Speed-Modifier", Minimum = 0, Maximum = 10, Default = SpeedValue, Decimals = 0.1, Pointer = SpeedValue,Callback = function(Default)
+	Func.ChangeSpeed()
+end})
+
+Window:Initialize()
