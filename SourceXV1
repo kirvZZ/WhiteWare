@@ -5,13 +5,15 @@ if game.PlaceId == 8343259840 then
 	--
 	local PlayerS = Window:Page({Name = "Player"})
 	local Aims = Window:Page({Name = "Combat"})
+	local Visual = Window:Page({Name = "Visual"})
 	--
 	local Players = game:GetService("Players")
-	
+
 	local Aimlock = Aims:Section({Name = "Aim-lock", Side = "Left"})
 	local SpeedHack = PlayerS:Section({Name = "Speed-Hack", Side = "Left"})
 	local AccelHack = PlayerS:Section({Name = "Acceleration", Side = "Left"})
 	local Values = PlayerS:Section({Name = "Other", Side = "Right"})
+	local EspPg1 = PlayerS:Section({Name = "Esp #1", Side = "Left"})
 
 	local Func = {}
 
@@ -19,6 +21,18 @@ if game.PlaceId == 8343259840 then
 	local SpeedValue = 1
 	local Acceleration = false
 	local AccelerationValue = 1
+
+	local esp1 = false
+
+	local EspConfig = {
+		BillSize = UDim2.new(1000,0,1000,0),
+		FrameSize = UDim2.new(0.005,0,0.005,0),
+		FramePos = UDim2.new(0.5,0,0.5,0),
+		FramePoint = Vector2.new(0.5,0.5),
+		FrameColor = Color3.fromRGB(255,255,255),
+		Gm = game.Workspace.Terrain,
+		Gm1 = "espcnc"
+	}
 
 	local function CreateSpeed()
 		local InstanceValue = Instance.new("NumberValue")
@@ -129,7 +143,7 @@ if game.PlaceId == 8343259840 then
 			game.Players.LocalPlayer.DevEnableMouseLock = true
 		end
 	end
-	
+
 	function vggd(v)
 		if ((v) == true) then
 			game.Players.LocalPlayer.CameraMaxZoomDistance = 10000
@@ -137,7 +151,7 @@ if game.PlaceId == 8343259840 then
 			game.Players.LocalPlayer.CameraMaxZoomDistance = 10
 		end
 	end
-	
+
 	function aei(v)
 		if ((v) == true) then
 			_G.EnabledJJSXKSGA = true
@@ -145,7 +159,106 @@ if game.PlaceId == 8343259840 then
 			_G.EnabledJJSXKSGA = false
 		end
 	end
+
+	local EspConfig = {
+		BillSize = UDim2.new(1000,0,1000,0),
+		FrameSize = UDim2.new(0.005,0,0.005,0),
+		FramePos = UDim2.new(0.5,0,0.5,0),
+		FramePoint = Vector2.new(0.5,0.5),
+		FrameColor = Color3.fromRGB(255,255,255),
+		Gm = game.Workspace.Terrain,
+		Gm1 = "espcnc"
+	}
+
+	function EspCreate(i)
+		local V,ProtectedCreation = pcall(function()
+			local EspFolder
+			if not EspConfig.Gm:FindFirstChild("espcnc") then
+				EspFolder = Instance.new("Folder",EspConfig.Gm)
+				EspFolder.Name = EspConfig.Gm1
+			else
+				EspFolder = EspConfig.Gm
+			end
+
+			local char = i.Character
+			local humpart
+			if char:FindFirstChild("HumanoidRootPart") then
+				humpart = char:WaitForChild("HumanoidRootPart")
+			end
+
+			local I1 = Instance.new("BillboardGui")
+			local I2 = Instance.new("Frame")
+			local I3 = Instance.new("UIStroke")
+			local I4 = Instance.new("TextLabel")
+
+
+			I1.Enabled = true
+			I1.Parent = EspConfig.Gm:WaitForChild(EspConfig.Gm1)
+			I1.Adornee = humpart
+			I1.LightInfluence = 0
+			I1.AlwaysOnTop = true
+			I1.Size = EspConfig.BillSize
+			I1.ResetOnSpawn = false
+			I1.Name = i.Name
+			
+			I2.Position = EspConfig.FramePos
+			I2.Size = EspConfig.FrameSize
+			I2.BackgroundTransparency = 1
+			I2.AnchorPoint = EspConfig.FramePoint
+			I2.Parent = I1
+
+			I3.Thickness = 1
+			I3.Color = EspConfig.FrameColor
+			I3.Parent = I2
+			I3.LineJoinMode = Enum.LineJoinMode.Miter
+
+			I4.Parent = I1
+			I4.Text = i.Name
+			I4.BackgroundTransparency = 1
+			I4.TextColor3 = EspConfig.FrameColor
+			I4.TextStrokeTransparency = 0
+			I4.TextSize = 14
+			I4.TextWrapped = true
+			I4.Font = "MontserratBold"
+			I4.Position = UDim2.new(0.5,0,0.503,0)
+			I4.Size = UDim2.new(0,500,0,50)
+			I4.AnchorPoint = EspConfig.FramePoint
+		end)
+	end
+	function EspToggle(v)
+		if v == true then
+			for _,i in pairs(game.Players:GetChildren()) do
+				if i.Name == game.Players.LocalPlayer then
+				else
+					if i.Character then
+						EspCreate(i)
+					end
+				end
+			end
+		else
+			if EspConfig.Gm:FindFirstChild(EspConfig.Gm1) then
+				EspConfig.Gm[EspConfig.Gm1]:Destroy()
+			end
+		end
+	end
 	
+	function AutoEsp()
+		game.Players.PlayerAdded:Connect(function(p)
+			if esp1 == true then
+				EspCreate(p)
+			end
+		end)
+		game.Players.PlayerRemoving:Connect(function(p)
+			if esp1 == true then
+				if EspConfig.Gm:FindFirstChild(EspConfig.Gm1) then
+					EspConfig.Gm[EspConfig.Gm1]:FindFirstChild(p.Name):Destroy()
+				end
+			end
+		end)
+	end
+	
+	
+	AutoEsp()
 	AutoToggleAcceleration()
 	AutoToggleSpeed()
 	SpeedHack:Toggle({Title = "Speed",Default = false,Callback = function(Default) 
@@ -205,13 +318,17 @@ if game.PlaceId == 8343259840 then
 	Values:Toggle({Title = "Disable shift-locking",Default = false,Callback = function(Default) 
 		oggd(Default)
 	end})
-	
+
 	Values:Toggle({Title = "Unlock camera zoom",Default = false,Callback = function(Default) 
 		vggd(Default)
 	end})
-	
+
 	Aimlock:Toggle({Title = "Enabled",Default = false,Callback = function(Default) 
 		aei(Default)
+	end})
+	
+	EspPg1:Toggle({Title = "Enabled",Default = false,Callback = function(Default) 
+		EspToggle(Default)
 	end})
 	
 
