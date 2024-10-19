@@ -1,4 +1,4 @@
-if game.PlaceId == 8343259840 and (_G.SpekWhiteLocker == nil or _G.SpekWhiteLocker == false) then
+if game.PlaceId == 8343259840 and (_G.SpekWhiteLocker == "truthx") then
 	_G.SpekWhiteLocker = true
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
