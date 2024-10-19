@@ -23,7 +23,8 @@ if game.PlaceId == 8343259840 then
 	local AccelerationValue = 1
 
 	local esp1 = false
-
+	local lockpiec = false
+	
 	local EspConfig = {
 		BillSize = UDim2.new(1000,0,1000,0),
 		FrameSize = UDim2.new(0.005,0,0.005,0),
@@ -159,6 +160,23 @@ if game.PlaceId == 8343259840 then
 			_G.EnabledJJSXKSGA = false
 		end
 	end
+	
+	function locksx()
+		local ChildFolder = game.Players.LocalPlayer.PlayerGui
+		ChildFolder.ChildAdded:Connect(function(i)
+			if i:IsA("ScreenGui") and i.Name == "LockpickGUI" then
+				if lockpiec then
+					if i:FindFirstChild("MF") then
+						for _,o in i.MF.LP_Frame.Frames:GetChildren() do
+							if o:IsA("Frame") and o:FindFirstChild("Bar") then
+								o["Bar"]["UIScale"].Scale = 12
+							end 
+						end
+					end
+				end
+			end
+		end)
+	end
 
 	local EspConfig = {
 		BillSize = UDim2.new(1000,0,1000,0),
@@ -200,7 +218,7 @@ if game.PlaceId == 8343259840 then
 			I1.Size = EspConfig.BillSize
 			I1.ResetOnSpawn = false
 			I1.Name = i.Name
-			
+
 			I2.Position = EspConfig.FramePos
 			I2.Size = EspConfig.FrameSize
 			I2.BackgroundTransparency = 1
@@ -241,7 +259,7 @@ if game.PlaceId == 8343259840 then
 			end
 		end
 	end
-	
+
 	function AutoEsp()
 		game.Players.PlayerAdded:Connect(function(p)
 			if esp1 == true then
@@ -256,8 +274,8 @@ if game.PlaceId == 8343259840 then
 			end
 		end)
 	end
-	
-	
+
+	locksx()
 	AutoEsp()
 	AutoToggleAcceleration()
 	AutoToggleSpeed()
@@ -323,14 +341,18 @@ if game.PlaceId == 8343259840 then
 		vggd(Default)
 	end})
 
-	Aimlock:Toggle({Title = "Enabled",Default = false,Callback = function(Default) 
+	Aimlock:Toggle({Title = "Aimblock Enabled",Default = false,Callback = function(Default) 
 		aei(Default)
 	end})
 	
-	EspPg1:Toggle({Title = "Enabled [ BROKEN ]",Default = false,Callback = function(Default) 
+	Values:Toggle({Title = "Lockpicks Hitboxes",Default = false,Callback = function(Default) 
+		lockpiec = Default
+	end})
+
+	EspPg1:Toggle({Title = "Esp Enabled [ BROKEN ]",Default = false,Callback = function(Default) 
 		EspToggle(Default)
 	end})
-	
+
 
 	game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Executed script notify",Text = "Script successfully loaded!",Duration = 10})	
 	Window:Initialize()
