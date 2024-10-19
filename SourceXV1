@@ -13,7 +13,7 @@ if game.PlaceId == 8343259840 then
 	local SpeedHack = PlayerS:Section({Name = "Speed-Hack", Side = "Left"})
 	local AccelHack = PlayerS:Section({Name = "Acceleration", Side = "Left"})
 	local Values = PlayerS:Section({Name = "Other", Side = "Right"})
-	local EspPg1 = PlayerS:Section({Name = "Esp #1", Side = "Left"})
+	local EspPg1 = Visual:Section({Name = "Esp #1", Side = "Left"})
 
 	local Func = {}
 
@@ -207,7 +207,7 @@ if game.PlaceId == 8343259840 then
 			I2.AnchorPoint = EspConfig.FramePoint
 			I2.Parent = I1
 
-			I3.Thickness = 1
+			I3.Thickness = 2
 			I3.Color = EspConfig.FrameColor
 			I3.Parent = I2
 			I3.LineJoinMode = Enum.LineJoinMode.Miter
