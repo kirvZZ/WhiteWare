@@ -8,7 +8,7 @@ if game.PlaceId == 8343259840 then
 	local PlayerS = Window:Page({Name = "Player"})
 	local Aims = Window:Page({Name = "Combat"})
 	local Visual = Window:Page({Name = "Visual"})
-	local System = Window:Page({Name = "System"})
+	local Systemz = Window:Page({Name = "System"})
 	--
 	local Players = game:GetService("Players")
 
@@ -18,8 +18,8 @@ if game.PlaceId == 8343259840 then
 	local Values = PlayerS:Section({Name = "Other", Side = "Right"})
 	local EspPg1 = Visual:Section({Name = "Esp #1", Side = "Left"})
 	
-	local LockpickSz = System:Section({Name = "Lockpicks", Side = "Left"})
-	local Cameraz = System:Section({Name = "Camera", Side = "Right"})
+	local LockpickSz = Systemz:Section({Name = "Lockpicks", Side = "Left"})
+	local Cameraz = Systemz:Section({Name = "Camera", Side = "Right"})
 
 	
 	
@@ -339,7 +339,7 @@ if game.PlaceId == 8343259840 then
 		end
 	end})
 
-	System:Toggle({Title = "Unlock all items [FAKE]",Default = false,Callback = function(Default) 
+	Values:Toggle({Title = "Unlock all items [FAKE]",Default = false,Callback = function(Default) 
 		letmego(Default)
 	end})
 
