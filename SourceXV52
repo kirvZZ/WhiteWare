@@ -1,11 +1,14 @@
 if game.PlaceId == 8343259840 then
+	_G.SplixKeyUiBind9298419 = Enum.KeyCode.Insert
+	
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
-	local Window = Library:New({Name = "White?? | v1.07 | (press Alt to hide)", Accent = Color3.fromRGB(255, 255, 255)})
+	local Window = Library:New({Name = "White?? [ Criminality ] | v1.12 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
 	--
 	local PlayerS = Window:Page({Name = "Player"})
 	local Aims = Window:Page({Name = "Combat"})
 	local Visual = Window:Page({Name = "Visual"})
+	local System = Window:Page({Name = "System"})
 	--
 	local Players = game:GetService("Players")
 
@@ -14,7 +17,13 @@ if game.PlaceId == 8343259840 then
 	local AccelHack = PlayerS:Section({Name = "Acceleration", Side = "Left"})
 	local Values = PlayerS:Section({Name = "Other", Side = "Right"})
 	local EspPg1 = Visual:Section({Name = "Esp #1", Side = "Left"})
+	
+	local LockpickSz = System:Section({Name = "Lockpicks", Side = "Left"})
+	local Cameraz = System:Section({Name = "Camera", Side = "Right"})
 
+	
+	
+	
 	local Func = {}
 
 	local Speed = false
@@ -24,6 +33,7 @@ if game.PlaceId == 8343259840 then
 
 	local esp1 = false
 	local lockpiec = false
+	local lockpiecsize = 1
 	
 	local EspConfig = {
 		BillSize = UDim2.new(1000,0,1000,0),
@@ -169,7 +179,7 @@ if game.PlaceId == 8343259840 then
 					if i:FindFirstChild("MF") then
 						for _,o in i.MF.LP_Frame.Frames:GetChildren() do
 							if o:IsA("Frame") and o:FindFirstChild("Bar") then
-								o["Bar"]["UIScale"].Scale = 12
+								o["Bar"]["UIScale"].Scale = lockpiecsize
 							end 
 						end
 					end
@@ -329,15 +339,15 @@ if game.PlaceId == 8343259840 then
 		end
 	end})
 
-	Values:Toggle({Title = "Unlock all items [FAKE]",Default = false,Callback = function(Default) 
+	System:Toggle({Title = "Unlock all items [FAKE]",Default = false,Callback = function(Default) 
 		letmego(Default)
 	end})
 
-	Values:Toggle({Title = "Disable shift-locking",Default = false,Callback = function(Default) 
+	Cameraz:Toggle({Title = "Disable shift-locking",Default = false,Callback = function(Default) 
 		oggd(Default)
 	end})
 
-	Values:Toggle({Title = "Unlock camera zoom",Default = false,Callback = function(Default) 
+	Cameraz:Toggle({Title = "Unlock camera zoom",Default = false,Callback = function(Default) 
 		vggd(Default)
 	end})
 
@@ -345,8 +355,12 @@ if game.PlaceId == 8343259840 then
 		aei(Default)
 	end})
 	
-	Values:Toggle({Title = "Lockpicks Hitboxes",Default = false,Callback = function(Default) 
+	LockpickSz:Toggle({Title = "Enabled",Default = false,Callback = function(Default) 
 		lockpiec = Default
+	end})
+	
+	LockpickSz:Slider({Name = "Hitbox Size", Minimum = 0.1, Maximum = 50, Default = lockpiecsize, Decimals = 0.1, Pointer = lockpiecsize,Callback = function(Default)
+		lockpiecsize = Default
 	end})
 
 	EspPg1:Toggle({Title = "Esp Enabled [ BROKEN ]",Default = false,Callback = function(Default) 
