@@ -355,7 +355,7 @@ if game.PlaceId == 8343259840 then
 		aei(Default)
 	end})
 	
-	LockpickSz:Toggle({Title = "Enabled",Default = false,Callback = function(Default) 
+	LockpickSz:Toggle({Title = "Hitboxes Enabled",Default = false,Callback = function(Default) 
 		lockpiec = Default
 	end})
 	
