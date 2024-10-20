@@ -7,7 +7,7 @@ if game.PlaceId == 8343259840 then
 	
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
-	local Window = Library:New({Name = "White?? [ Criminality ] | v1.12 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
+	local Window = Library:New({Name = "White?? [ Criminality ] | v1.13 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
 	--
 	local PlayerS = Window:Page({Name = "Player"})
 	local Aims = Window:Page({Name = "Combat"})
