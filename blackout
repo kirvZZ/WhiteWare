@@ -5,6 +5,8 @@ if game.PlaceId == 15432890326 then
 		local galkwgkqogklasgl = Instance.new("BoolValue",game.CoreGui)
 		galkwgkqogklasgl.Name = "SplixCode9"
 
+		_G.SetupKeyCodeCenterSplix = Enum.KeyCode.Insert
+
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
 		local Window = Library:New({Name = "White?? | Blackout: Revival | v1.027", Accent = Color3.fromRGB(255, 255, 255)})
@@ -38,12 +40,7 @@ if game.PlaceId == 15432890326 then
 		_G.Flightx827Speed = 2
 		_G.Flightx827Noclip = true
 		
-		
 		--VALUES
-		
-		coroutine.wrap(function()
-			
-		end)()
 		
 		function vggd(v)
 			if ((v) == true) then
