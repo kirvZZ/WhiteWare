@@ -1,5 +1,9 @@
 if game.PlaceId == 8343259840 then
-	_G.SplixKeyUiBind9298419 = Enum.KeyCode.Insert
+	if game.CoreGui:FindFirstChild("SplixCode9") then
+		game:GetService("StarterGui"):SetCore("SendNotification",{Title = "White-Ware",Text = "Script already executed.",Duration = 10})
+	else
+	local galkwgkqogklasgl = Instance.new("BoolValue",game.CoreGui)
+	galkwgkqogklasgl.Name = "SplixCode9"
 	
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
@@ -367,9 +371,8 @@ if game.PlaceId == 8343259840 then
 		EspToggle(Default)
 	end})
 
-
-	game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Executed script notify",Text = "Script successfully loaded!",Duration = 10})	
 	Window:Initialize()
+	end
 else
-	game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Executed script notify",Text = "Script doesnt support this game",Duration = 10})
+	game:GetService("StarterGui"):SetCore("SendNotification",{Title = "White-Ware",Text = "Script support only game 'Criminality'! ",Duration = 10})
 end
