@@ -79,10 +79,13 @@ if game.PlaceId == 15432890326 then
 			end
 		end
 		
-		while infstamina do
+		coroutine.wrap(function()
+			while infstamina == true do
 				task.wait()
 				game.Players.LocalPlayer.PlayerGui:SetAttribute("Stamina",staminaval)
-		end
+			end
+		end)()
+		
 
 		Incognito:Toggle({Title = "Incognito",Default = incognitoval,Callback = function(Default) 
 			incognitoval = Default
