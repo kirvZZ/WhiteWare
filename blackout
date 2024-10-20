@@ -1,1 +1,126 @@
+if game.PlaceId == 15432890326 then
+	if game.CoreGui:FindFirstChild("SplixCode9") then
+		game:GetService("StarterGui"):SetCore("SendNotification",{Title = "White-Ware",Text = "Script already executed.",Duration = 10})
+	else
+		local galkwgkqogklasgl = Instance.new("BoolValue",game.CoreGui)
+		galkwgkqogklasgl.Name = "SplixCode9"
 
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
+		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
+		local Window = Library:New({Name = "White?? [ Blackout ] | v1.02 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
+		
+		--
+		local Aims = Window:Page({Name = "Combat"})
+		local Visual = Window:Page({Name = "Visual"})
+		local Player = Window:Page({Name = "Player"})
+		
+		local Aimlock = Aims:Section({Name = "Aim-lock", Side = "Left"})
+		local Incognito = Visual:Section({Name = "Incognito", Side = "Left"})
+		local Stamina = Player:Section({Name = "Stamina-Modifier", Side = "Left"})
+		local Cameraz = Player:Section({Name = "Camera", Side = "Left"})
+
+		--
+		
+		
+		--VALUES
+		
+		
+		
+		local reallevel = game.Players.LocalPlayer:GetAttribute("Level")
+		local flevel = reallevel
+
+		local incognitoval = false
+		local infstamina = false
+		local staminaval = 100
+
+		--VALUES
+		
+		function vggd(v)
+			if ((v) == true) then
+				game.Players.LocalPlayer.CameraMaxZoomDistance = 10000
+			else
+				game.Players.LocalPlayer.CameraMaxZoomDistance = 10
+			end
+		end
+		
+		function aei(v)
+			if ((v) == true) then
+				_G.EnabledJJSXKSGA = true
+			else
+				_G.EnabledJJSXKSGA = false
+			end
+		end
+		
+		function incognito(v)
+			if v == true then
+				local LP = game.Players.LocalPlayer
+				local Username = "#0000"
+				local Level = flevel
+
+				local Path1 = LP.PlayerGui.MainStaticGui.RightTab.Leaderboard.PlayerList
+				local Path2 = Path1[LP.Name]
+				Path2.DisplayName.Text = Username
+				Path2.Username.Text = Username
+
+				LP:SetAttribute("Level",Level)
+				LP.PlayerGui:SetAttribute("Level",Level)
+			else
+				local LP = game.Players.LocalPlayer
+				local Username = ""
+				local Level = reallevel
+
+				local Path1 = LP.PlayerGui.MainStaticGui.RightTab.Leaderboard.PlayerList
+				local Path2 = Path1[LP.Name]
+				Path2.DisplayName.Text = LP.DisplayName
+				Path2.Username.Text = LP.Name
+
+				LP:SetAttribute("Level",Level)
+				LP.PlayerGui:SetAttribute("Level",Level)
+			end
+		end
+		
+		local coro = coroutine.create(function()
+			while infstamina do
+				task.wait()
+				game.Players.LocalPlayer.PlayerGui:SetAttribute("Stamina",staminaval)
+			end
+		end)
+		
+		
+		
+		
+		Incognito:Toggle({Title = "Incognito",Default = incognitoval,Callback = function(Default) 
+			incognitoval = Default
+			incognito(Default)
+		end})
+
+		Incognito:Slider({Name = "Level", Minimum = 0, Maximum = 50, Default = flevel, Decimals = 1, Pointer = flevel,Callback = function(Default)
+			flevel = Default
+			if incognitoval then
+				incognito(true)
+			else
+				incognito(false)
+			end
+		end})
+		
+		Stamina:Toggle({Title = "Infinity - Stamina",Default = infstamina,Callback = function(Default) 
+			infstamina = Default
+		end})
+
+		Stamina:Slider({Name = "Loop Number", Minimum = 0, Maximum = 100, Default = staminaval, Decimals = 1, Pointer = staminaval,Callback = function(Default)
+			staminaval = Default
+		end})
+		
+		Cameraz:Toggle({Title = "Unlock Max Camera Zoom",Default = false,Callback = function(Default) 
+			vggd(Default)
+		end})
+		
+		Aimlock:Toggle({Title = "Aimblock Enabled",Default = false,Callback = function(Default) 
+			aei(Default)
+		end})
+		
+		Window:Initialize()
+	end
+else
+	game:GetService("StarterGui"):SetCore("SendNotification",{Title = "White-Ware",Text = "Script support only game 'Blackout'! ",Duration = 10})
+end
