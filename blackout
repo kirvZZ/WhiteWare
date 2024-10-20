@@ -1,6 +1,6 @@
 if game.PlaceId == 15432890326 then
 	if game.CoreGui:FindFirstChild("SplixCode9") then
-		game:GetService("StarterGui"):SetCore("SendNotification",{Title = "White-Ware",Text = "Script already executed.",Duration = 9})
+		game:GetService("StarterGui"):SetCore("SendNotification",{Title = "White-Ware",Text = "Script already executed.",Duration = 11})
 	else
 		local galkwgkqogklasgl = Instance.new("BoolValue",game.CoreGui)
 		galkwgkqogklasgl.Name = "SplixCode9"
