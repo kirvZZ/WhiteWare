@@ -7,18 +7,18 @@ if game.PlaceId == 15432890326 then
 
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
-		local Window = Library:New({Name = "White?? [ Blackout ] | v1.14 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
+		local Window = Library:New({Name = "White?? | Blackout: Revival | v1.027", Accent = Color3.fromRGB(255, 255, 255)})
 		
 		--
+		local Player = Window:Page({Name = "Player"})
 		local Aims = Window:Page({Name = "Combat"})
 		local Visual = Window:Page({Name = "Visual"})
-		local Player = Window:Page({Name = "Player"})
 		
 		local Aimlock = Aims:Section({Name = "Aim-lock", Side = "Left"})
 		local Incognito = Visual:Section({Name = "Incognito", Side = "Left"})
 		local Stamina = Player:Section({Name = "Stamina-Modifier", Side = "Left"})
 		local Cameraz = Player:Section({Name = "Camera", Side = "Left"})
-
+		local HideBind = Visual:Section({Name = "Hide Menu Key", Side = "Right"})
 		--
 		
 		
@@ -32,14 +32,31 @@ if game.PlaceId == 15432890326 then
 		local incognitoval = false
 		local infstamina = false
 		local staminaval = 100
-
+		
+		_G.Flightx827Key = Enum.KeyCode.H
+		_G.Scriptx827Key = Enum.KeyCode.F8
+		_G.Flightx827Speed = 2
+		_G.Flightx827Noclip = true
+		
+		
 		--VALUES
+		
+		coroutine.wrap(function()
+			
+		end)()
 		
 		function vggd(v)
 			if ((v) == true) then
 				game.Players.LocalPlayer.CameraMaxZoomDistance = 10000
 			else
 				game.Players.LocalPlayer.CameraMaxZoomDistance = 10
+			end
+		end
+		function hggd(v)
+			if ((v) == true) then
+				game.Players.LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
+			else
+				game.Players.LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Zoom
 			end
 		end
 		
@@ -54,7 +71,16 @@ if game.PlaceId == 15432890326 then
 		function incognito(v)
 			if v == true then
 				local LP = game.Players.LocalPlayer
-				local Username = "#0000"
+				
+				local A = {"1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F"}
+				local B = "#"
+					..A[math.random(1,#A)]
+					..A[math.random(1,#A)]
+					..A[math.random(1,#A)]
+					..A[math.random(1,#A)]
+					..A[math.random(1,#A)]
+				
+				local Username = B
 				local Level = flevel
 
 				local Path1 = LP.PlayerGui.MainStaticGui.RightTab.Leaderboard.PlayerList
@@ -83,7 +109,7 @@ if game.PlaceId == 15432890326 then
 			while true do
 				task.wait()
 				if infstamina == true then
-				game.Players.LocalPlayer.PlayerGui:SetAttribute("Stamina",staminaval)
+					game.Players.LocalPlayer.PlayerGui:SetAttribute("Stamina",staminaval)
 				end
 			end
 		end)()
@@ -104,21 +130,27 @@ if game.PlaceId == 15432890326 then
 		end})
 		
 		Stamina:Toggle({Title = "Infinity - Stamina",Default = infstamina,Callback = function(Default) 
-			
 			infstamina = Default
-			print(infstamina)
 		end})
 
-		Stamina:Slider({Name = "Loop Number", Minimum = 0, Maximum = 100, Default = staminaval, Decimals = 1, Pointer = staminaval,Callback = function(Default)
+		Stamina:Slider({Name = "Stamina - Loop Number", Minimum = 0, Maximum = 100, Default = staminaval, Decimals = 1, Pointer = staminaval,Callback = function(Default)
 			staminaval = Default
 		end})
 		
-		Cameraz:Toggle({Title = "Unlock Max Camera Zoom",Default = false,Callback = function(Default) 
+		Cameraz:Toggle({Title = "Unlock Camera-Zoom [!]",Default = false,Callback = function(Default) 
 			vggd(Default)
 		end})
 		
-		Aimlock:Toggle({Title = "Aimblock Enabled",Default = false,Callback = function(Default) 
+		Cameraz:Toggle({Title = "Noclip Camera [!]",Default = false,Callback = function(Default) 
+			hggd(Default)
+		end})
+		
+		Aimlock:Toggle({Title = "Aim-lock",Default = false,Callback = function(Default) 
 			aei(Default)
+		end})
+		
+		HideBind:Keybind({Name = "Hide Key", Default = Enum.KeyCode.Insert, KeybindName = "Readjustment", Mode = "Toggle", Pointer = "ExtraBind",Callback = function(Default) 
+			_G.SetupKeyCodeCenterSplix = Default
 		end})
 		
 		Window:Initialize()
