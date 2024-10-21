@@ -9,7 +9,7 @@ if game.PlaceId == 15432890326 then
 
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
-		local Window = Library:New({Name = "White?? | Blackout: Revival | v1.027", Accent = Color3.fromRGB(255, 255, 255)})
+		local Window = Library:New({Name = "White?? | Blackout: Revival | v1.028", Accent = Color3.fromRGB(255, 255, 255)})
 		
 		--
 		local Player = Window:Page({Name = "Player"})
