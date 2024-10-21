@@ -21,6 +21,7 @@ if game.PlaceId == 15432890326 then
 		local Stamina = Player:Section({Name = "Stamina-Modifier", Side = "Left"})
 		local Cameraz = Player:Section({Name = "Camera", Side = "Left"})
 		local HideBind = Visual:Section({Name = "Hide Menu Key", Side = "Right"})
+		local Blindxzc = Player:Section({Name = "Blind", Side = "Right"})
 		--
 		
 		
@@ -40,13 +41,114 @@ if game.PlaceId == 15432890326 then
 		_G.Flightx827Speed = 2
 		_G.Flightx827Noclip = true
 		
-		
+		local Blinded = false
 		--VALUES
 		
 		coroutine.wrap(function()
 			
 		end)()
+
+		function Blind(v)
+
+			local V,ProtectedCall = pcall(function()
+					if v == true then
 		
+		
+				local BlindPart_Name = "HumanoidRootPart"
+				local HumanoidPart_Name = "ClosedByBlind"
+		
+		
+				local nc = game.Players.LocalPlayer
+		
+				if nc.Character then
+					Blinded = true
+					local HumanoidPart = nc.Character:WaitForChild("HumanoidRootPart")
+					local BlindPart = HumanoidPart:Clone()
+			
+					HumanoidPart:AddTag("Real")
+					HumanoidPart.Name = HumanoidPart_Name
+			
+			
+					BlindPart:AddTag("Fake")
+					BlindPart.Parent = nc.Character
+					BlindPart.Name = BlindPart_Name
+			
+					
+					local InstancesFolder
+					if not game.Workspace.Terrain:FindFirstChild("InstancesFolder") then
+						InstancesFolder = Instance.new("Model")
+						InstancesFolder.Parent = game.Workspace.Terrain
+						InstancesFolder.Name = "InstancesFolder"
+					else
+						InstancesFolder = game.Workspace.Terrain["InstancesFolder"]
+					end
+			
+					local InstanceView = HumanoidPart:Clone()
+			
+					for _,i in InstanceView:GetChildren() do
+						i:Destroy()
+					end
+			
+					InstanceView.Parent = InstancesFolder
+					InstanceView.Name = "Torso"
+			
+					InstanceView.Material = Enum.Material.ForceField
+					InstanceView.Color = Color3.fromRGB(9, 137, 207)
+			
+					InstanceView.CastShadow = false
+					InstanceView.Anchored = true
+			
+					InstanceView.CanTouch = false
+					InstanceView.CanCollide = false
+					InstanceView.Transparency = 0
+			
+					local InstanceHL = Instance.new("Highlight")
+					InstanceHL.Parent = InstanceView
+					InstanceHL.DepthMode = Enum.HighlightDepthMode.Occluded
+					InstanceHL.FillTransparency = 1
+					InstanceHL.OutlineTransparency = 0
+					InstanceHL.OutlineColor = Color3.fromRGB(255,255,255)
+			
+					InstanceHL.Enabled = true
+			
+					local InstanceHum = Instance.new("Humanoid")
+					InstanceHum.Parent = InstancesFolder
+			
+					local InstanceCloth = Instance.new("Shirt")
+					InstanceCloth.ShirtTemplate = "http://www.roblox.com/asset/?id=144076357"
+			
+					InstanceCloth.Parent = InstancesFolder
+			
+			
+				else
+					Blinded = false
+				end
+			else
+
+
+				local nc = game.Players.LocalPlayer
+
+				if nc.Character then
+					Blinded = false
+					for _,i in nc.Character:GetChildren() do
+						if i:HasTag("Real") then
+							i.Name = "HumanoidRootPart"
+							i:RemoveTag("Real")
+						elseif i:HasTag("Fake") then
+							i:Destroy()
+						end
+					end
+			
+					if game.Workspace.Terrain:FindFirstChild("InstancesFolder") then
+						for _,i in game.Workspace.Terrain["InstancesFolder"]:GetChildren() do
+							i:Destroy()
+						end
+					end
+				end
+			end
+			end)
+		end
+
 		function vggd(v)
 			if ((v) == true) then
 				game.Players.LocalPlayer.CameraMaxZoomDistance = 10000
@@ -141,6 +243,10 @@ if game.PlaceId == 15432890326 then
 		
 		Cameraz:Toggle({Title = "Unlock Camera-Zoom [!]",Default = false,Callback = function(Default) 
 			vggd(Default)
+		end})
+
+		Blindxzc:Toggle({Title = "Enable Blind [!]",Default = false,Callback = function(Default) 
+			Blind(Default)
 		end})
 		
 		Cameraz:Toggle({Title = "Noclip Camera [!]",Default = false,Callback = function(Default) 
