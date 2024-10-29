@@ -1,53 +1,53 @@
 if game.CoreGui:FindFirstChild("SplixCode9") then
-		game:GetService("StarterGui"):SetCore("SendNotification",{Title = "White-Ware",Text = "Script already executed.",Duration = 10})
-	else
+	game:GetService("StarterGui"):SetCore("SendNotification",{Title = "White-Ware",Text = "Script already executed.",Duration = 10})
+else
 	local galkwgkqogklasgl = Instance.new("BoolValue",game.CoreGui)
 	galkwgkqogklasgl.Name = "SplixCode9"
-	
+
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
 	local Window = Library:New({Name = "White?? [ Flex Your Ping And FPS! ] | v1.01 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
 	--
 	local Script = Window:Page({Name = "Script"})
 
 	local FPS = Script:Section({Name = "FPS", Side = "Left"})
-  local FpsV = false
-  local FpsStable = false
-  local FpsC = 240
+	local FpsV = false
+	local FpsStable = false
+	local FpsC = 240
 
-  local FpsRange = 10
+	local FpsRange = 10
 
-  corountine.wrap(function()
-      while FpsV == true do
-          task.wait(1)
-          if FpsStable then
-              game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC)
-          else
-              local temp = math.random(1,FpsRange)
-              local temp2 = math.random(1,2)
+	coroutine.wrap(function()
+		while FpsV == true do
+			task.wait(1)
+			if FpsStable then
+				game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC)
+			else
+				local temp = math.random(1,FpsRange)
+				local temp2 = math.random(1,2)
 
-              if temp2 == 2 then
-                   game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC=FpsC-temp)
-              else
-                  game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC=FpsC+temp)
-              end
-          end
-      end
-  end)()
- 
-  FPS:Toggle({Title = "Enable Fake Fps",Default = FpsV,Callback = function(Default) 
+				if temp2 == 2 then
+					game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC-temp)
+				else
+					game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC+temp)
+				end
+			end
+		end
+	end)()
+
+	FPS:Toggle({Title = "Enable Fake Fps",Default = FpsV,Callback = function(Default) 
 		FpsV = Default
 		if FpsV == true then
-       if  game.Players.LocalPlayer.Character then
-           game.Players.LocalPlayer.Character:FindFirstChild("LocalScript").Enabled = false
-       end
-    else
-       if  game.Players.LocalPlayer.Character then
-           game.Players.LocalPlayer.Character:FindFirstChild("LocalScript").Enabled = true
-       end
-    end
+			if  game.Players.LocalPlayer.Character then
+				game.Players.LocalPlayer.Character:FindFirstChild("LocalScript").Enabled = false
+			end
+		else
+			if  game.Players.LocalPlayer.Character then
+				game.Players.LocalPlayer.Character:FindFirstChild("LocalScript").Enabled = true
+			end
+		end
 	end})
 
-  FPS:Toggle({Title = "Stable fps",Default = FpsV,Callback = function(Default) 
+	FPS:Toggle({Title = "Stable fps",Default = FpsV,Callback = function(Default) 
 		FpsStable = Default
 	end})
 
@@ -60,4 +60,4 @@ if game.CoreGui:FindFirstChild("SplixCode9") then
 	end})
 
 	Window:Initialize()
-	end
+end
