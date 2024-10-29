@@ -4,9 +4,8 @@ if game.CoreGui:FindFirstChild("SplixCode9") then
 	local galkwgkqogklasgl = Instance.new("BoolValue",game.CoreGui)
 	galkwgkqogklasgl.Name = "SplixCode9"
 	
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 	local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
-	local Window = Library:New({Name = "White?? [ Criminality ] | v1.13 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
+	local Window = Library:New({Name = "White?? [ Flex Your Ping And FPS! ] | v1.01 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
 	--
 	local Script = Window:Page({Name = "Script"})
 
