@@ -17,18 +17,21 @@ else
 	local FpsRange = 10
 
 	coroutine.wrap(function()
-		while FpsV == true do
-			task.wait(1)
-			if FpsStable then
-				game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC)
-			else
-				local temp = math.random(1,FpsRange)
-				local temp2 = math.random(1,2)
-
-				if temp2 == 2 then
-					game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC-temp)
+		while true do
+			task.wait(0.1)
+			if FpsV == true then
+				task.wait(1)
+				if FpsStable then
+					game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC)
 				else
-					game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC+temp)
+					local temp = math.random(1,FpsRange)
+					local temp2 = math.random(1,2)
+
+					if temp2 == 2 then
+						game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC-temp)
+					else
+						game:GetService("ReplicatedStorage").FPSUpdateEventIKnowYouReCheater:FireServer(FpsC+temp)
+					end
 				end
 			end
 		end
