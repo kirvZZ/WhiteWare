@@ -4,9 +4,8 @@ if game.CoreGui:FindFirstChild("SplixCode9") then
 		local galkwgkqogklasgl = Instance.new("BoolValue",game.CoreGui)
 		galkwgkqogklasgl.Name = "SplixCode9"
 
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
-		local Window = Library:New({Name = "[HIT-BOX EXPANDER (HEAD)] v1.1", Accent = Color3.fromRGB(255, 255, 255)})
+		local Window = Library:New({Name = "[HIT-BOX EXPANDER (HEAD)] v1.2", Accent = Color3.fromRGB(255, 255, 255)})
 		--
 		local Aims = Window:Page({Name = "Combat"})
 		local Systemz = Window:Page({Name = "Misc"})
