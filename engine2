@@ -7,7 +7,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
 		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
-		local Window = Library:New({Name = "White?? [ Criminality ] | v1.15 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
+		local Window = Library:New({Name = "White?? [ Criminality ] | v1.16 | Insert to hide Menu", Accent = Color3.fromRGB(255, 255, 255)})
 		--
 		local PlayerS = Window:Page({Name = "Player"})
 		local Aims = Window:Page({Name = "Combat"})
@@ -304,27 +304,17 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 					if c == true then
 						if v.Character then
 							if v.Character:FindFirstChild("Head") then
-								v.Character["Head"].Size = Vector3.new(15,15,15)
-								v.Character["Head"].Anchored = false
-								v.Character["Head"].CanCollide = false
+								v.Character["Head"].Size = Vector3.new(headsizerange,headsizerange,headsizerange)
 								v.Character["Head"].Massless = true
 								v.Character["Head"].Transparency = visibleheadsize
-								if v.Character["Head"]:FindFirstChild("face") then
-									v.Character["Head"].face.Transparency = 1
-								end
 							end
 						end
 					else
 						if v.Character then
 							if v.Character:FindFirstChild("Head") then
 								v.Character["Head"].Size = Vector3.new(1.15,1.15,1.15)
-								v.Character["Head"].Anchored = false
-								v.Character["Head"].CanCollide = true
 								v.Character["Head"].Massless = false
 								v.Character["Head"].Transparency = 0
-								if v.Character["Head"]:FindFirstChild("face") then
-									v.Character["Head"].face.Transparency = 0
-								end
 							end
 						end
 					end
@@ -336,26 +326,15 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 							if v.Character then
 								if v.Character:FindFirstChild("Head") then
 									v.Character["Head"].Size = Vector3.new(headsizerange,headsizerange,headsizerange)
-									v.Character["Head"].Anchored = false
-									v.Character["Head"].CanCollide = false
 									v.Character["Head"].Massless = true
 									v.Character["Head"].Transparency = visibleheadsize
-									if v.Character["Head"]:FindFirstChild("face") then
-										v.Character["Head"].face.Transparency = 1
-									end
 								end
 							end
 						else
 							if v.Character then
 								if v.Character:FindFirstChild("Head") then
 									v.Character["Head"].Size = Vector3.new(1.15,1.15,1.15)
-									v.Character["Head"].Anchored = false
-									v.Character["Head"].CanCollide = true
-									v.Character["Head"].Massless = false
 									v.Character["Head"].Transparency = 0
-									if v.Character["Head"]:FindFirstChild("face") then
-										v.Character["Head"].face.Transparency = 0
-									end
 								end
 							end
 						end
@@ -489,14 +468,20 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 		
 		hdsx:Toggle({Title = "Head Hitbox Visible",Default = visibleheadsize,Callback = function(Default) 
 			if Default == true then
-				visibleheadsize = 0.5
+				visibleheadsize = 0.6
 			else
 				visibleheadsize = 1
+			end
+			if headsizeval == true then
+				headsize(true)
 			end
 		end})
 
 		hdsx:Slider({Name = "Head Hitbox Size", Minimum = 1, Maximum = 15, Default = headsizerange, Decimals = 1, Pointer = headsizerange,Callback = function(Default)
 			headsizerange = Default
+			if headsizeval == true then
+				headsize(true)
+			end
 		end})
 		
 		
