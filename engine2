@@ -12,7 +12,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 		local PlayerS = Window:Page({Name = "Player"})
 		local Aims = Window:Page({Name = "Combat"})
 		local Visual = Window:Page({Name = "Visual"})
-		local Systemz = Window:Page({Name = "System"})
+		local Systemz = Window:Page({Name = "Misc"})
 		--
 		local Players = game:GetService("Players")
 
@@ -22,6 +22,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 		local AccelHack = PlayerS:Section({Name = "Acceleration", Side = "Left"})
 		local Values = PlayerS:Section({Name = "Other", Side = "Right"})
 		local EspPg1 = Visual:Section({Name = "Esp #1", Side = "Left"})
+		local HideBind = Systemz:Section({Name = "Menu", Side = "Right"})
 
 		local LockpickSz = Systemz:Section({Name = "Lockpicks", Side = "Left"})
 		local Cameraz = Systemz:Section({Name = "Camera", Side = "Right"})
@@ -490,6 +491,11 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 		-- Player esp
 		EspPg1:Toggle({Title = "Esp Enabled",Default = false,Callback = function(Default) 
 			EspToggle(Default)
+		end})
+
+		--Bind
+		HideBind:Keybind({Name = "Hide Menu Key", Default = _G.SetupKeyCodeCenterSplix, KeybindName = "Readjustment", Mode = "Toggle", Pointer = _G.SetupKeyCodeCenterSplix,Callback = function(Default) 
+			_G.SetupKeyCodeCenterSplix = Default
 		end})
 
 		Window:Initialize()
