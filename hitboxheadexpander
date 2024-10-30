@@ -86,7 +86,7 @@ if game.CoreGui:FindFirstChild("SplixCode9") then
 				if v.Name ~= game.Players.LocalPlayer.Name then
 					v.CharacterAdded:Connect(function()
 						if headsizeval == true then
-							headsize(true,p.Name)
+							headsize(true,v.Name)
 						end
 					end)	
 				end
