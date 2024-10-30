@@ -1,1 +1,129 @@
+if game.CoreGui:FindFirstChild("SplixCode9") then
+		game:GetService("StarterGui"):SetCore("SendNotification",{Title = "White-Ware",Text = "Script already executed.",Duration = 10})
+	else
+		local galkwgkqogklasgl = Instance.new("BoolValue",game.CoreGui)
+		galkwgkqogklasgl.Name = "SplixCode9"
 
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
+		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
+		local Window = Library:New({Name = "[HIT-BOX EXPANDER (HEAD)] v1.1", Accent = Color3.fromRGB(255, 255, 255)})
+		--
+		local Aims = Window:Page({Name = "Combat"})
+		local Systemz = Window:Page({Name = "Misc"})
+		--
+		local Players = game:GetService("Players")
+
+		local hdsx = Aims:Section({Name = "Head-Size", Side = "Left"})
+		local HideBind = Systemz:Section({Name = "Menu", Side = "Right"})
+
+		_G.SetupKeyCodeCenterSplix = Enum.KeyCode.Insert
+		_G.EnabledJJSXKSGA = false
+
+
+
+		local Func = {}
+
+		local Speed = false
+		local SpeedValue = 1
+		local Acceleration = false
+		local AccelerationValue = 1
+
+		local esp1 = false
+		local lockpiec = false
+		local lockpiecsize = 1
+		
+		local headsizeval = false
+		local headsizerange = 3
+		local visibleheadsize = false
+
+		function headsize(c,m)
+			if m ~= nil then
+				if game.Players:FindFirstChild(m) then
+					local v = game.Players[m]
+					if c == true then
+						if v.Character then
+							if v.Character:FindFirstChild("Head") then
+								v.Character["Head"].Size = Vector3.new(headsizerange,headsizerange,headsizerange)
+								v.Character["Head"].Massless = true
+								v.Character["Head"].Transparency = visibleheadsize
+							end
+						end
+					else
+						if v.Character then
+							if v.Character:FindFirstChild("Head") then
+								v.Character["Head"].Size = Vector3.new(1.15,1.15,1.15)
+								v.Character["Head"].Massless = false
+								v.Character["Head"].Transparency = 0
+							end
+						end
+					end
+				end
+			else
+				for _,v in game.Players:GetChildren() do
+					if v.Name ~= game.Players.LocalPlayer.Name then
+						if c == true then
+							if v.Character then
+								if v.Character:FindFirstChild("Head") then
+									v.Character["Head"].Size = Vector3.new(headsizerange,headsizerange,headsizerange)
+									v.Character["Head"].Massless = true
+									v.Character["Head"].Transparency = visibleheadsize
+								end
+							end
+						else
+							if v.Character then
+								if v.Character:FindFirstChild("Head") then
+									v.Character["Head"].Size = Vector3.new(1.15,1.15,1.15)
+									v.Character["Head"].Transparency = 0
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+
+		function autoheadsize()
+			game.Players.PlayerAdded:Connect(function(p)
+				p.CharacterAdded:Connect(function()
+					if headsizeval == true then
+						headsize(true,p.Name)
+					end
+				end)		
+			end)
+		end
+		
+		
+		autoheadsize()
+
+		
+		-- Head Hitbox
+		hdsx:Toggle({Title = "Head Hitbox Enabled",Default = headsizeval,Callback = function(Default) 
+			headsizeval = Default
+			headsize(Default)
+		end})
+		
+		hdsx:Toggle({Title = "Head Hitbox Visible",Default = visibleheadsize,Callback = function(Default) 
+			if Default == true then
+				visibleheadsize = 0.6
+			else
+				visibleheadsize = 1
+			end
+			if headsizeval == true then
+				headsize(true)
+			end
+		end})
+
+		hdsx:Slider({Name = "Head Hitbox Size", Minimum = 1, Maximum = 15, Default = headsizerange, Decimals = 1, Pointer = headsizerange,Callback = function(Default)
+			headsizerange = Default
+			if headsizeval == true then
+				headsize(true)
+			end
+		end})
+
+		--Bind
+		HideBind:Keybind({Name = "Hide Menu Key", Default = _G.SetupKeyCodeCenterSplix, KeybindName = "Readjustment", Mode = "Toggle", Pointer = _G.SetupKeyCodeCenterSplix,Callback = function(Default) 
+			_G.SetupKeyCodeCenterSplix = Default
+		end})
+
+		Window:Initialize()
+	end
