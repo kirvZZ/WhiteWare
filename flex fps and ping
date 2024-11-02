@@ -58,7 +58,7 @@ else
 		FpsC = Default
 	end})
 
-	FPS:Slider({Name = "Fps Range", Minimum = 1, Maximum = 20, Default = FpsRange, Decimals = 1, Pointer = FpsRange,Callback = function(Default)
+	FPS:Slider({Name = "Fps Range", Minimum = 1, Maximum = 200, Default = FpsRange, Decimals = 1, Pointer = FpsRange,Callback = function(Default)
 		FpsRange = Default
 	end})
 
